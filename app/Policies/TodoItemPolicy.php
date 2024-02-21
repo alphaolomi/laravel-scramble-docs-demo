@@ -19,7 +19,7 @@ class TodoItemPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, TodoItem $todoItem): bool
+    public function view(User $user, TodoItem $todoItem): Response
     {
         return $user->id === $todoItem->user_id
             ? Response::allow()
@@ -37,7 +37,7 @@ class TodoItemPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, TodoItem $todoItem): bool
+    public function update(User $user, TodoItem $todoItem): Response
     {
         return $user->id === $todoItem->user_id
             ? Response::allow()
@@ -47,7 +47,7 @@ class TodoItemPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, TodoItem $todoItem): bool
+    public function delete(User $user, TodoItem $todoItem): Response
     {
         return $user->id === $todoItem->user_id
             ? Response::allow()
@@ -57,7 +57,7 @@ class TodoItemPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, TodoItem $todoItem): bool
+    public function restore(User $user, TodoItem $todoItem): Response
     {
         return $user->id === $todoItem->user_id
             ? Response::allow()
@@ -67,7 +67,7 @@ class TodoItemPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, TodoItem $todoItem): bool
+    public function forceDelete(User $user, TodoItem $todoItem): Response
     {
        return $user->id === $todoItem->user_id
             ? Response::allow()
@@ -75,7 +75,7 @@ class TodoItemPolicy
     }
 
     // isOwner
-    public function isOwner(User $user, TodoItem $todoItem): bool
+    public function isOwner(User $user, TodoItem $todoItem): Response
     {
         return $user->id === $todoItem->user_id
             ? Response::allow()

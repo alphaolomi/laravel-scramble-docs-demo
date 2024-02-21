@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TodoItem;
 use App\Http\Requests\StoreTodoItemRequest;
 use App\Http\Requests\UpdateTodoItemRequest;
+use App\Http\Resources\TodoItemResource;
 
 class TodoItemController extends Controller
 {
@@ -13,7 +14,9 @@ class TodoItemController extends Controller
      */
     public function index()
     {
-        return TodoItem::paginate(10);
+        $todoItems = TodoItem::paginate(10);
+
+        return TodoItemResource::collection($todoItems);
     }
 
 
@@ -26,7 +29,7 @@ class TodoItemController extends Controller
 
         $todoItem = TodoItem::create($data);
 
-        return $todoItem;
+        return new TodoItemResource($todoItem);
     }
 
     /**
@@ -34,7 +37,7 @@ class TodoItemController extends Controller
      */
     public function show(TodoItem $todoItem)
     {
-        return $todoItem;
+        return new TodoItemResource($todoItem);
     }
 
 
@@ -48,7 +51,7 @@ class TodoItemController extends Controller
 
         $todoItem->update($data);
 
-        return $todoItem;
+        return new TodoItemResource($todoItem);
     }
 
     /**
