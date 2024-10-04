@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTodoItemRequest extends FormRequest
+class StoreTodoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,12 @@ class StoreTodoItemRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'completed' => 'required|boolean',
+            'sub_title' => 'nullable|string|max:255',
+            'content' => 'nullable|string',
+            'is_completed' => 'nullable|boolean',
+            'completed_at' => 'nullable|date',
+            'due_date' => 'nullable|date',
+            'parent_id' => 'nullable|integer|exists:todos,id',
         ];
     }
 }

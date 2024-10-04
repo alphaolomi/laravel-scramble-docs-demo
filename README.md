@@ -16,7 +16,7 @@ Documentation is generated from the codebase and is available at [http://localho
 
 ### Prerequisites
 
-- PHP 7.4 or higher
+- PHP 8.3 or higher
 - Composer
 
 

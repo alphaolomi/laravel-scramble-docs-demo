@@ -11,12 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('todo_items', function (Blueprint $table) {
+        Schema::create('todos', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('sub_title')->nullable();
             $table->text('content')->nullable();
-            $table->boolean('completed')->default(false);
-            $table->foreignId('user_id')->constrained();
+            $table->boolean('is_completed')->default(false);
+            $table->timestamp('completed_at')->nullable();
+            $table->timestamp('due_date')->nullable();
+            $table->foreignId('parent_id')->nullable();
+            $table->foreignIdFor(\App\Models\User::class);
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('todo_items');
+        Schema::dropIfExists('todos');
     }
 };
