@@ -8,4 +8,24 @@ updates:
   - package-ecosystem: "composer" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "monthly"
+      interval: "weekly"
+    # Prefix all commit messages with "Composer" plus its scope, that is, a
+    # list of updated dependencies
+    commit-message:
+      prefix: "[composer]"
+      include: "scope"
+    groups:
+       # Specify a name for the group, which will be used in pull request titles
+       # and branch names
+       dependencies:
+          applies-to: version-updates # Applies the group rule to version updates
+          patterns:
+            - "*"       # A wildcard that matches all dependencies in the package
+                        # ecosystem. Note: using "*" may open a large pull request
+
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    # Workflow files stored in the default location of `.github/workflows`. (You don't need to specify `/.github/workflows` for `directory`. You can use `directory: "/"`.)
+    directory: "/"
+    schedule:
+      interval: "weekly"
